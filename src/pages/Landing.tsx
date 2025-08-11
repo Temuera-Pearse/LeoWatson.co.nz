@@ -7,6 +7,9 @@ const Landing: React.FC = () => {
       className="d-flex align-items-center justify-content-center text-white text-center"
       style={{
         minHeight: '100vh',
+        width: '100vw',
+        height: '100dvh',
+        overflow: 'hidden',
         backgroundImage: 'url("/background.png")', // Replace with your actual image path
         backgroundSize: 'cover',
         backgroundPosition: 'center',
