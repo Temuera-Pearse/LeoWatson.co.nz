@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Home, Mail, Briefcase, User } from 'lucide-react'
+import { Home, Mail, Briefcase, User, Menu } from 'lucide-react'
 
 const menuItems = [
   { name: 'Welcome', href: '#landing', icon: <Home size={18} /> },
@@ -10,52 +10,47 @@ const menuItems = [
 
 const Topbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false) // NEW: controls mobile menu
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-
+    const handleScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
     <nav
-      className={`fixed-top py-3 transition ${
+      className={`navbar navbar-expand-md fixed-top py-2 py-md-3 ${
         scrolled ? 'bg-white shadow-sm' : 'bg-transparent'
       }`}
       style={{
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
       }}
     >
-      <div className="container d-flex justify-content-between align-items-center">
-        {/* Left Side: Branding */}
-        <div className="d-flex align-items-center gap-3">
-          <div className={scrolled ? 'text-dark' : 'text-white'}>
-            <h1 className="fw-bold mb-0 fs-4">
-              LEO WATSON BARRISTER AND SOLICITOR
-            </h1>
-            <p className="text-uppercase small fst-italic mb-0">
-              · Specialising in Indigenous Law Solutions ·
-            </p>
-          </div>
-
-          {/* Green Button */}
-          <a
-            href="#contactForm"
-            className="btn btn-success btn-sm"
-            style={{
-              backgroundColor: '#28e070', // bright green
-              borderColor: '#28e070',
-            }}
-          >
-            Contact Now
-          </a>
+      <div className="container">
+        {/* Branding */}
+        <div className={scrolled ? 'text-dark' : 'text-white'}>
+          <h1 className="fw-bold mb-0 lh-1 fs-6 fs-md-5">
+            LEO WATSON BARRISTER AND SOLICITOR
+          </h1>
+          <p className="text-uppercase small fst-italic mb-0 d-none d-md-block">
+            · Specialising in Indigenous Law Solutions ·
+          </p>
         </div>
 
-        {/* Right Side: Nav Links */}
-        <div className="d-flex gap-4">
+        {/* Hamburger Toggle */}
+        <button
+          className="navbar-toggler ms-2 d-md-none"
+          aria-expanded={open}
+          aria-controls="navbarMenu"
+          aria-label="Toggle navigation"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <Menu size={20} color={scrolled ? '#000' : '#fff'} />
+        </button>
+
+        {/* Desktop Nav */}
+        <div className="d-none d-md-flex align-items-center gap-3">
           {menuItems.map((item) => (
             <a
               key={item.name}
@@ -68,8 +63,53 @@ const Topbar: React.FC = () => {
               {item.name}
             </a>
           ))}
+          <a
+            href="#contactForm"
+            className="btn btn-success btn-sm"
+            style={{
+              backgroundColor: '#28e070',
+              borderColor: '#28e070',
+            }}
+          >
+            Contact Now
+          </a>
         </div>
       </div>
+
+      {/* Mobile Nav */}
+      {open && (
+        <div
+          id="navbarMenu"
+          className={`d-md-none ${scrolled ? 'bg-white' : 'bg-dark'}`}
+        >
+          <div className="container py-3">
+            {menuItems.map((item) => (
+              <a
+                key={item.name}
+                className={`nav-link py-2 d-flex align-items-center gap-2 ${
+                  scrolled ? 'text-dark' : 'text-white'
+                }`}
+                href={item.href}
+                onClick={() => setOpen(false)} // closes menu after click
+              >
+                {item.icon}
+                {item.name}
+              </a>
+            ))}
+            <a
+              href="#contactForm"
+              className="btn btn-success btn-sm mt-3"
+              style={{
+                backgroundColor: '#28e070',
+                borderColor: '#28e070',
+              }}
+              onClick={() => setOpen(false)}
+            >
+              Contact Now
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   )
 }
