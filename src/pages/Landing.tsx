@@ -29,7 +29,19 @@ const Landing: React.FC = () => {
 
       {/* Content */}
       <div style={{ zIndex: 2 }} className="container px-4">
-        <h1 className="display-4 fw-bold mb-3">Nau mai, Whakatau mai</h1>
+        <h1
+          className="fw-bold mb-3 text-nowrap"
+          style={{
+            fontSize: '2rem', // smaller for mobile
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            width: '100%',
+            maxWidth: '100vw',
+          }}
+        >
+          Nau mai, Whakatau mai
+        </h1>
         <p className="lead fst-italic mb-4">
           "Kia rongo i te hā o te whenua, kia ora i te tai o te ao, tihei mauri
           ora...!"

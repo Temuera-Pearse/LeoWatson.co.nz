@@ -86,7 +86,7 @@ const ContactForm: React.FC = () => {
             className="form-control"
             id="message"
             name="message"
-            rows={16}
+            rows={8}
             value={formData.message}
             onChange={handleChange}
             required

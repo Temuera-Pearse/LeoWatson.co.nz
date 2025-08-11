@@ -10,7 +10,7 @@ function Contact() {
         minHeight: '100vh',
       }}
     >
-      <div className="container py-5">
+      <div className="container py-3">
         <h2 className="mb-5 text-center">Contact Details</h2>
 
         <div className="row">
