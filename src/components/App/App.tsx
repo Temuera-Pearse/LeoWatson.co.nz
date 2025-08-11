@@ -1,10 +1,17 @@
 import { Outlet } from 'react-router-dom'
+import Topbar from '../Sidebar/Topbar'
 
 function App() {
   return (
     <div>
-      <div>
-        <Outlet />
+      <Topbar />
+
+      <div className="d-flex">
+        <div className="flex-grow-1">
+          <main className="flex-grow-1">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
   )

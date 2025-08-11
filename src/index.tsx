@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from 'react-query'
 import { createRoot } from 'react-dom/client'
 import { Suspense } from 'react'
 import {
@@ -6,22 +7,14 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { createRoot } from 'react-dom/client'
-import { Suspense, lazy, useEffect } from 'react'
-import {
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from 'react-router-dom'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './components/App/App'
+import Home from './pages/Home'
 
 export const routes = createRoutesFromElements(
-  <Route>
-    <Route path="/" element={<App />}>
-      <Route index element={<LandingPage />} />
-    </Route>
+  <Route path="/" element={<App />}>
+    <Route index element={<Home />} />
   </Route>
 )
 
@@ -32,20 +25,10 @@ function AppProvider() {
 document.addEventListener('DOMContentLoaded', () => {
   const queryClient = new QueryClient()
   createRoot(document.getElementById('app') as HTMLElement).render(
-    <Auth0Provider
-      domain="dev-6y46q58gseefv2ag.us.auth0.com"
-      clientId="SkptOkvgTHbSvYEFNKJreFxvWbLNW1fz"
-      cacheLocation="localstorage"
-      authorizationParams={{
-        audience: 'https://neighbours/api',
-        redirect_uri: `${window.location.origin}/newmarket`,
-      }}
-    >
-      <QueryClientProvider client={queryClient}>
-        <Suspense>
-          <AppProvider />
-        </Suspense>
-      </QueryClientProvider>
-    </Auth0Provider>
+    <QueryClientProvider client={queryClient}>
+      <Suspense>
+        <AppProvider />
+      </Suspense>
+    </QueryClientProvider>
   )
 })
