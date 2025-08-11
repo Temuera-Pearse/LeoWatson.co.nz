@@ -4,7 +4,7 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="text-dark d-flex align-items-center"
+      className="text-dark pt-5 d-flex align-items-center"
       style={{
         backgroundColor: '#E2E8F0', // Light gray/blue
         minHeight: '100vh',

@@ -4,13 +4,13 @@ const Expertise: React.FC = () => {
   return (
     <section
       id="expertise"
-      className=" align-items-center justify-content-center text-white"
+      className=" align-items-center pt-5 justify-content-center text-white"
       style={{
         backgroundColor: '#2D3748', // Darker gray
         minHeight: '100vh',
       }}
     >
-      <div className="container py-5">
+      <div className="container py-5 ">
         {/* Section 1 */}
         <h4 className="fw-semibold mb-3">Experienced litigator in:</h4>
         <ul>

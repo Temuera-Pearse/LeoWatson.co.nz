@@ -4,7 +4,7 @@ const About: React.FC = () => {
   return (
     <section
       id="about"
-      className="align-items-center justify-content-center text-white"
+      className="align-items-center pt-5 justify-content-center text-white"
       style={{
         backgroundColor: '#4A5568',
         minHeight: '100vh',
