@@ -27,35 +27,44 @@ const Topbar: React.FC = () => {
         transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
       }}
     >
-      <div className="container">
-        {/* Branding */}
-        <div className={scrolled ? 'text-dark' : 'text-white'}>
-          <h1 className="fw-bold mb-0 lh-1 fs-6 fs-md-5">
+      <div className="container d-flex align-items-center justify-content-between">
+        {/* Branding and Hamburger in a row */}
+        <div className="d-flex align-items-center">
+          <h1
+            className={`fw-bold mb-0 lh-1 fs-6 fs-md-5 me-2 ${
+              scrolled ? 'text-transparent' : 'text-white'
+            }`}
+          >
             LEO WATSON BARRISTER AND SOLICITOR
           </h1>
-          <p className="text-uppercase small fst-italic mb-0 d-none d-md-block">
+          {/* Hamburger Toggle */}
+          <button
+            className="navbar-toggler ms-2 d-md-none"
+            aria-expanded={open}
+            aria-controls="navbarMenu"
+            aria-label="Toggle navigation"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <Menu size={20} color={scrolled ? '#000' : '#fff'} />
+          </button>
+        </div>
+        {/* Subtitle below branding, only on md+ screens */}
+        <div className="d-none d-md-block ms-3">
+          <p
+            className={`text-uppercase small fst-italic mb-0 ${
+              scrolled ? 'text-transparent' : 'text-white'
+            }`}
+          >
             · Specialising in Indigenous Law Solutions ·
           </p>
         </div>
-
-        {/* Hamburger Toggle */}
-        <button
-          className="navbar-toggler ms-2 d-md-none"
-          aria-expanded={open}
-          aria-controls="navbarMenu"
-          aria-label="Toggle navigation"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <Menu size={20} color={scrolled ? '#000' : '#fff'} />
-        </button>
-
         {/* Desktop Nav */}
-        <div className="d-none d-md-flex align-items-center gap-3">
+        <div className="d-none d-md-flex align-items-center gap-3 ms-auto">
           {menuItems.map((item) => (
             <a
               key={item.name}
               className={`nav-link d-flex align-items-center gap-1 ${
-                scrolled ? 'text-dark' : 'text-white'
+                scrolled ? 'text-transparent' : 'text-white'
               }`}
               href={item.href}
             >
@@ -80,14 +89,14 @@ const Topbar: React.FC = () => {
       {open && (
         <div
           id="navbarMenu"
-          className={`d-md-none ${scrolled ? 'bg-white' : 'bg-dark'}`}
+          className={`d-md-none ${scrolled ? 'bg-white' : 'bg-transparent'}`}
         >
           <div className="container py-3">
             {menuItems.map((item) => (
               <a
                 key={item.name}
                 className={`nav-link py-2 d-flex align-items-center gap-2 ${
-                  scrolled ? 'text-dark' : 'text-white'
+                  scrolled ? 'text-transparent' : 'text-white'
                 }`}
                 href={item.href}
                 onClick={() => setOpen(false)} // closes menu after click
